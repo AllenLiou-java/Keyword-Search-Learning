@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關鍵字搜尋實作</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link rel="stylesheet" href="all.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <br>
+                    <label for="keyword">關鍵字</label>
+                    <h4>總共有{{ filtered_post.length }}篇文章</h4>
+                    <input v-model="filter" type="text" id="keyword">
+                </div>
+            </div>
+            <div class="row">
+                <postbox v-bind:post="p" v-for="p in filtered_post"></postbox>
+            </div>
+        </div>
+    </div>
+
+    <template id="post">
+        <div class="postbox col-sm-4">
+            <div class="post_inner">
+                <!-- 使用img標籤插入圖片時，因為圖片尺寸不一致，在設定width:100%時，渲染後高度不一致 -->
+                <!-- 為解決此問題，故採用動態產生background-image方式進行渲染 -->
+                <!-- <img v-bind:src="coverurl"> -->
+                <div class="img" v-bind:src="coverurl" v-bind:style="covercss"></div>
+
+                <!-- <h6>{{post.name_cht}}</h6> -->
+                <!-- <h4>{{post.title}}</h4> -->
+                <!-- <p>{{post.description}}</p> -->
+                
+                <h6 v-html="post.name_cht"></h6>
+                <h4 v-html="post.title"></h4>
+                <p v-html="post.description"></p>
+            </div>
+        </div>
+    </template>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="all.js"></script>
+</body>
+</html>
